@@ -14,14 +14,16 @@
 
 | 版本 | 文件 | 大小 | 部署内容 |
 | --- | --- | ---: | --- |
-| 轻量版 | [下载轻量版 .sh](https://github.com/yanghongwei98/fangqiang_oneclick/releases/download/v2026.11.24/sing-box-plus-offline-lite-universal.sh) | 约 46 MiB | 10 个直连节点。有可用的系统 Python 3 时启动订阅服务 |
-| WARP 完整版 | [下载 WARP 完整版 .sh](https://github.com/yanghongwei98/fangqiang_oneclick/releases/download/v2026.11.24/sing-box-plus-offline-warp-universal.sh) | 约 247 MiB | 10 个直连节点和 10 个 WARP 节点。内置备用 Python 3 |
+| 轻量版 | [下载轻量版 .sh](https://github.com/yanghongwei98/fangqiang_oneclick/releases/download/v2026.11.24.1/sing-box-plus-offline-lite-universal.sh) | 约 46 MiB | 10 个直连节点。有可用的系统 Python 3 时启动订阅服务 |
+| WARP 完整版 | [下载 WARP 完整版 .sh](https://github.com/yanghongwei98/fangqiang_oneclick/releases/download/v2026.11.24.1/sing-box-plus-offline-warp-universal.sh) | 约 247 MiB | 10 个直连节点和 10 个 WARP 节点。内置备用 Python 3 |
 
 两个包自动识别 `x86_64`（amd64）或 `aarch64`（arm64），支持 Debian 11/12/13 和 Ubuntu 22.04/24.04，需在运行 systemd 的服务器上以 root 或 sudo 安装。
 
-发行说明和附件集中在 [v2026.11.24 Release](https://github.com/yanghongwei98/fangqiang_oneclick/releases/tag/v2026.11.24)。
+当前补丁版修复了两种安装包的 `singbox-offline` 管理命令执行权限。发行说明和附件见 [v2026.11.24.1 Release](https://github.com/yanghongwei98/fangqiang_oneclick/releases/tag/v2026.11.24.1)。
 
 ## 安装
+
+使用 AI 助手逐步部署时，可把 [AI 安装手册](AI-INSTALL.md) 交给助手参考。
 
 将其中一个 `.sh` 上传到 VPS，在文件所在目录执行对应命令。把 `SERVER_IP_OR_DOMAIN` 替换为实际公网 IP 或域名。
 
@@ -39,7 +41,7 @@ sudo bash sing-box-plus-offline-warp-universal.sh --address SERVER_IP_OR_DOMAIN 
 
 ## 校验与实测
 
-- 下载 [SHA256SUMS](https://github.com/yanghongwei98/fangqiang_oneclick/releases/download/v2026.11.24/SHA256SUMS)，在同一目录运行 `sha256sum --ignore-missing -c SHA256SUMS` 核对已下载的安装包。也可运行 `bash 安装包文件名.sh --verify` 检查包内文件。
+- 下载与版本对应的 [SHA256SUMS](https://github.com/yanghongwei98/fangqiang_oneclick/releases/download/v2026.11.24.1/SHA256SUMS)，在同一目录运行 `sha256sum --ignore-missing -c SHA256SUMS` 核对已下载的安装包。也可运行 `TMPDIR=/var/tmp bash 安装包文件名.sh --verify` 检查包内文件。
 - 两版都在断网的 Debian 11（amd64、arm64）和 Debian 12（amd64）虚拟机中通过全新安装、端口监听和订阅认证测试。
 - 测试覆盖默认订阅端口已被占用、轻量版保留密钥和订阅升级到完整版，以及缺少系统 Python 和 OpenSSL 时使用完整版内置组件。
 - Debian 11 使用兼容 glibc 2.31 的 WARP 构建。Debian 13 与 Ubuntu 两个版本属于安装器支持范围，实装测试覆盖上述三种 Debian 环境。 [Cloudflare Linux 软件包](https://pkg.cloudflareclient.com/)
